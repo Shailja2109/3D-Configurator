@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Namdhinggo&display=swap');
+
+.Scale,
+.Color,
+.Skybox,
+.Materials {
+  display: flex;
+  flex-direction: column;
+  margin: 1vh;
+  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.Materials, .Skybox{
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+button, input{
+  padding: 1vh 2vh;
+  margin: 1vh;
+  background-color: #d7d7d7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 0px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #2a2a2a;
+  
+}
+
+p{
+  padding: 0px;
+  margin: 0px;
+}
+
+.Main {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  padding: 5vh;
+  height: 80%;
+}
+
+.ControlText{
+  font-size: 1.5rem;
+}
