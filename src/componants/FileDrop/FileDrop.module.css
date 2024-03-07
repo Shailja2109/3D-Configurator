@@ -46,7 +46,9 @@
 .Canvas3D > p{
   position: fixed;
   top: 15vh;
-  color: white
+  color: white;
+  top: 17vh;
+  left: 9vh;
 }
 
 .ControlPanel {
