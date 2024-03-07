@@ -67,23 +67,25 @@ const FileDrop = () => {
             onDragOver={handleDragOver} 
         >
             <p>3D Configurator</p>
-            {is3dFile ?
-                <div className={classes.Main}>
-                    <div className={classes.Canvas3D} >
-                        <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [0, 0, 5] }}>
-                            {/* Adding Configurator for 3D Viewer */}
-                            <Configurator3D modelFile={modelFile} onSetMaterials={setMaterials} controls={controls} />
-                        </Canvas>
-                        <p>3D Canvas</p>
-                    </div>
-                    <div className={classes.ControlPanel}>
-                        {/* Adding Control Pannel to Manipulate 3D Model */}
-                        <p>Control Panel</p>
-                        <ControlPanel materials={materials} onSetControls={setControls}/>
-                    </div>
-                </div>
-                : <div className={classes.ControlText}><p>Drag glTF 2.0</p></div>
-            }
+            <div className={classes.Main}>
+                {is3dFile ?
+                    <>
+                        <div className={classes.Canvas3D} >
+                            <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [0, 0, 5] }}>
+                                {/* Adding Configurator for 3D Viewer */}
+                                <Configurator3D modelFile={modelFile} onSetMaterials={setMaterials} controls={controls} />
+                            </Canvas>
+                            <p>3D Canvas</p>
+                        </div>
+                        <div className={classes.ControlPanel}>
+                            {/* Adding Control Pannel to Manipulate 3D Model */}
+                            <p>Control Panel</p>
+                            <ControlPanel materials={materials} onSetControls={setControls}/>
+                        </div>
+                    </>
+                    : <div className={classes.ControlText}><p>Drag glTF 2.0</p></div>
+                }
+            </div>
         </div>
     )
 }

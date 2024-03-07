@@ -4,20 +4,14 @@
   width: 99vw;
   height: 95vh;
   text-align: center;
-  background-color: black;
   font-family: 'Namdhinggo', sans-serif;
   font-size: 25px;
   letter-spacing: 5px;
-  color: #333;
-  overflow: -moz-hidden-unscrollable;
   margin: 0px;
-}
-
-.fileDropContainer>p {
-  background-color: black;
-  color: azure;
-  padding: 5vh 0vh 0vh 0vh;
-  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .fileInput {
@@ -30,38 +24,41 @@
   font-size: 2rem;
   margin: 0px;
 }
-
+canvas
+{
+  border-radius: 20px;
+  height: inherit !important;
+  width: inherit !important;
+}
 .Canvas3D {
-  display: flex;
-  flex-direction: column;
-  width: 75vw;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   color: #2a2a2a;
-  font-size: 2rem;
-  background-color: grey;
-  
+  font-size: 2rem;  
+  border-radius: 20px;
+  position: relative;
+  text-align: center;
+  border-radius: 20px;
 }
 
 .Canvas3D > p{
-  position: fixed;
-  top: 15vh;
-  color: white;
-  top: 17vh;
-  left: 9vh;
+  position: absolute;
+  top: 10px;
+  color: black;
+  left: 20px;
 }
 
 .ControlPanel {
   display: flex;
   flex-direction: column;
-  width: 25vw;
   justify-content: center;
   align-items: center;
   color: #d7d7d7;
   background-color: #2a2a2a;
   font-size: 2rem;
-  padding: 0px;
-  margin: 0px;
+  padding: 20px;
+  border-radius: 20px;
+  height: 80vh !important;
+  overflow:auto;
 }
 
 p{
@@ -72,21 +69,110 @@ p{
 .Main {
   display: flex;
   flex-direction: row;
-  padding: 5vh;
-  height: 80%;
+  gap: 10px;
+  border-radius: 20px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .ControlText{
-  padding: 5vh;
+  padding: 20px 25px;
   background-color: #777777;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 10px;
   font-size: 15px;
   cursor: pointer;
   color: black;
-  position: fixed;
-  left: 43%;
-  top: 40%
+  max-height: 20px;
+}
+
+
+/* Small screens (phones) */
+@media only screen and (max-width: 600px) {
+  .fileDropContainer {
+    font-size: 18px;
+    flex-direction: column;
+  }
+  .Main
+  {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .fileInput {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+  }
+
+  .Canvas3D {
+    position: relative;
+    font-size: 1.5rem;
+    flex: 1;
+  }
+  canvas{
+    width: 100vw !important;
+    height: 70vh !important;
+  }
+
+  .ControlPanel {
+    font-size: 1.5rem;
+    padding: 10px;
+    flex: 1;
+  }
+
+  .ControlText {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+}
+
+/* Medium screens (tablets) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .fileDropContainer {
+    font-size: 20px;
+  }
+
+  .fileInput {
+    padding: 1rem 3rem;
+    font-size: 1.8rem;
+  }
+
+  .Canvas3D {
+    font-size: 1.8rem;
+  }
+
+  .ControlPanel {
+    font-size: 1.8rem;
+    padding: 15px;
+  }
+
+  .ControlText {
+    padding: 15px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Large screens (desktops) */
+@media only screen and (min-width: 1025px) {
+  .fileDropContainer {
+    font-size: 25px;
+  }
+
+  .fileInput {
+    padding: 1rem 4rem;
+    font-size: 2rem;
+  }
+
+  .Canvas3D {
+    font-size: 2rem;
+  }
+
+  .ControlPanel {
+    font-size: 2rem;
+    padding: 20px;
+  }
+
+  .ControlText {
+    padding: 20px 25px;
+    font-size: 15px;
+  }
 }
