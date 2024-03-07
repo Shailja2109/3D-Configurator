@@ -15,7 +15,6 @@ const Skybox = ({ textureUrl }) => {
 };
 
 const Configurator3D = (props) => {
-  console.log(props.controls.Scale)
   const nodes = useGLTF(props.modelFile.Url)
   const objectRef = useRef();
 
