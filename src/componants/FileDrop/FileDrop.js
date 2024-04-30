@@ -13,10 +13,11 @@ const FileDrop = () => {
     const [controls, setControls] = useState({})
 
     let dummyControls = {
-        'Scale' : 250,
-        'Color' : '#ffffff',
-        'Skybox' : 'https://images.pexels.com/photos/7078634/pexels-photo-7078634.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        'Material' : null
+        'Scale': 250,
+        'Color': '#ffffff',
+        'Skybox': 'https://images.pexels.com/photos/7078634/pexels-photo-7078634.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'Material': null,
+        'AnimationValue': 0.001
     }
 
     // Functional Component to drag and drop personal 3D GLTF files
@@ -25,7 +26,7 @@ const FileDrop = () => {
         const items = e.dataTransfer.items;
         if (items.length === 1 && items[0].kind === 'file') {
             const item = items[0].webkitGetAsEntry();
-            if (item.isFile) {
+            if (item.isFile || item.isDirectory) {
                 const file = items[0].getAsFile();
                 const fileExtenstion = file.name.split('.')[1];
 
@@ -38,12 +39,11 @@ const FileDrop = () => {
                     const newVariant = {
                         Id: Date.now(),
                         Url: url,
+                        Extension: fileExtenstion
                     };
                     setModelFile(newVariant)
                     setControls(dummyControls)
                 }
-            } else if (item.isDirectory) {
-                window.alert("Folder is uploaded,Please select only file.");
             }
         } else {
             window.alert("Please drop only a single file.");
@@ -64,7 +64,7 @@ const FileDrop = () => {
         <div
             className={classes.fileDropContainer}
             onDrop={handleDrop}
-            onDragOver={handleDragOver} 
+            onDragOver={handleDragOver}
         >
             <p>3D Configurator</p>
             {is3dFile ?
@@ -79,7 +79,7 @@ const FileDrop = () => {
                     <div className={classes.ControlPanel}>
                         {/* Adding Control Pannel to Manipulate 3D Model */}
                         <p>Control Panel</p>
-                        <ControlPanel materials={materials} onSetControls={setControls}/>
+                        <ControlPanel materials={materials} onSetControls={setControls} />
                     </div>
                 </div>
                 : <div className={classes.ControlText}><p>Drag glTF 2.0</p></div>

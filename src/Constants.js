@@ -6,5 +6,7 @@ export const ImageExtensions = [
     'bmp'
 ]
 export const ThreeDModelExtensions = [
-    'glb'
+    'glb',
+    'obj',
+    'gltf'
 ]

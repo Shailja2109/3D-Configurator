@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import classes from './ControlPannel.module.css';
 import { ColorPicker } from 'primereact/colorpicker';
+import { HexColorPicker } from "react-colorful";
 
 const ControlPanel = ({ materials, onSetControls }) => {
   const [color, setColor] = useState('#ffffff')
-  const [scale, setScale] = useState(250)
+  const [scale, setScale] = useState(100)
   const [material, setMaterial] = useState('')
   const [skybox, setSkybox] = useState('')
+  const [animationValue, setAnimationValue] = useState(0)
+  const [selectedValue, setSelectedValue] = useState('');
+
+  // Function to handle changes in the dropdown selection
+  const handleSelectChange = (event) => {
+    setSelectedValue(event.target.value);
+    setMaterial(event.target.value)
+  };
 
   useEffect(() => {
     onSetControls(prevControls => ({
       ...prevControls,
-      'Color': '#' + color
+      'Color': color
     }));
   }, [color])
 
@@ -21,6 +30,13 @@ const ControlPanel = ({ materials, onSetControls }) => {
       'Scale': scale
     }));
   }, [scale])
+
+  useEffect(() => {
+    onSetControls(prevControls => ({
+      ...prevControls,
+      'AnimationValue': animationValue
+    }))
+  }, [animationValue])
 
   useEffect(() => {
     onSetControls(prevControls => ({
@@ -39,25 +55,23 @@ const ControlPanel = ({ materials, onSetControls }) => {
   }
 
   return (<>
-    <p className={classes.ControlText}>Materials</p>
-    <div className={classes.Materials}>
-      {Object.keys(materials).map((matName, index) => (
-        <>
-          <button onClick={() => {
-            setMaterial(matName)
-          }}>
-            <p>{matName}</p>
-          </button>
-        </>
-      ))}
-    </div>
-    <p className={classes.ControlText}>Scale</p>
     <div className={classes.Scale}>
-      <input type="range" min={100} max={1000} defaultValue={250} onChange={(e) => { setScale(e.target.value) }} />
+      <p className={classes.ControlText}>Scale : </p>
+      <input type="range" min={100} max={1000} defaultValue={100} onChange={(e) => { setScale(e.target.value) }} />
     </div>
-    <p className={classes.ControlText}>Color</p>
+    <div className={classes.Materials}>
+      <p className={classes.ControlText}>Material : </p>
+      <select id="dropdown" value={selectedValue} onChange={(e) => { handleSelectChange(e) }}>
+        <option value="">-- Select --</option>
+        {Object.keys(materials).map((matName, index) => (
+          <>
+            <option value={matName}>{index}: {matName}</option>
+          </>
+        ))}
+      </select>
+    </div>
     <div className={classes.Color}>
-      <ColorPicker format="hex" value={color} onChange={(e) => setColor(e.value)} inline />
+      <HexColorPicker color={color} onChange={setColor} />
     </div>
     <p className={classes.ControlText}> Skybox </p>
     <div className={classes.Skybox}>
@@ -73,6 +87,13 @@ const ControlPanel = ({ materials, onSetControls }) => {
       <button onClick={SetSkyboxControls()}>
         Submit
       </button>
+    </div>
+    <p className={classes.ControlText}> Animation </p>
+    <div className={classes.Animation}>
+      <button onClick={() => { setAnimationValue(0.001) }}>Start</button>
+      <button onClick={() => { setAnimationValue(0) }}>Stop</button>
+      <button onClick={() => { setAnimationValue(animationValue + 0.001) }}>+</button>
+      <button onClick={() => { setAnimationValue(animationValue - 0.001) }}>-</button>
     </div>
   </>);
 };
